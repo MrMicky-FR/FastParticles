@@ -8,6 +8,11 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+/**
+ * An API for display particles on all server versions from 1.7 to 1.13
+ *
+ * @author MrMicky
+ */
 public class FastParticle {
 
     private static AbstractParticleSender particleSender = getSender();

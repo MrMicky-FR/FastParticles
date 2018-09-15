@@ -5,6 +5,9 @@ import org.bukkit.Color;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
+/**
+ * @author MrMicky
+ */
 @SuppressWarnings("deprecation")
 public enum ParticleEnum {
 
