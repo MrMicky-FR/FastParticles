@@ -1,7 +1,7 @@
 package fr.mrmicky.fastparticle.compatibility;
 
 import fr.mrmicky.fastparticle.FastParticle;
-import fr.mrmicky.fastparticle.ParticleEnum;
+import fr.mrmicky.fastparticle.ParticleType;
 import org.bukkit.Color;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -97,7 +97,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
     }
 
     @Override
-    public void spawnParticle(Player player, ParticleEnum particle, double x, double y, double z, int count,
+    public void spawnParticle(Player player, ParticleType particle, double x, double y, double z, int count,
                               double offsetX, double offsetY, double offsetZ, double extra, Object data) {
         try {
             int[] datas = toData(particle, data);
@@ -133,7 +133,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
     }
 
     @Override
-    public void spawnParticle(World world, ParticleEnum particle, double x, double y, double z, int count,
+    public void spawnParticle(World world, ParticleType particle, double x, double y, double z, int count,
                               double offsetX, double offsetY, double offsetZ, double extra, Object data) {
         try {
             int[] datas = toData(particle, data);
@@ -168,7 +168,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
     }
 
     @Override
-    public Object getParticle(ParticleEnum particle) {
+    public Object getParticle(ParticleType particle) {
         if (!SERVER_IS_1_8) {
             return particle.getName();
         }
@@ -181,11 +181,11 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private Object enumParticleValueOf(ParticleEnum particle) {
+    private Object enumParticleValueOf(ParticleType particle) {
         return Enum.valueOf((Class<Enum>) ENUM_PARTICLE, particle.toString().toUpperCase());
     }
 
-    private int[] toData(ParticleEnum particle, Object data) {
+    private int[] toData(ParticleType particle, Object data) {
         Class<?> dataType = particle.getDataType();
         if (dataType == ItemStack.class) {
             if (data == null) {

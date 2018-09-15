@@ -1,6 +1,6 @@
 package fr.mrmicky.fastparticle.compatibility;
 
-import fr.mrmicky.fastparticle.ParticleEnum;
+import fr.mrmicky.fastparticle.ParticleType;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.Particle.DustOptions;
@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 public class ParticleSender1_13 extends ParticleSender {
 
     @Override
-    public void spawnParticle(Player player, ParticleEnum particle, double x, double y, double z, int count,
+    public void spawnParticle(Player player, ParticleType particle, double x, double y, double z, int count,
                               double offsetX, double offsetY, double offsetZ, double extra, Object data) {
         Particle bukkitParticle = Particle.valueOf(particle.toString());
 
@@ -32,7 +32,7 @@ public class ParticleSender1_13 extends ParticleSender {
     }
 
     @Override
-    public void spawnParticle(World world, ParticleEnum particle, double x, double y, double z, int count,
+    public void spawnParticle(World world, ParticleType particle, double x, double y, double z, int count,
                               double offsetX, double offsetY, double offsetZ, double extra, Object data) {
         Particle bukkitParticle = Particle.valueOf(particle.toString());
 
