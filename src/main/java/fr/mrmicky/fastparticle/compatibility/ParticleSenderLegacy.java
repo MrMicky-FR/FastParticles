@@ -1,7 +1,7 @@
 package fr.mrmicky.fastparticle.compatibility;
 
+import fr.mrmicky.fastparticle.FastParticle;
 import fr.mrmicky.fastparticle.ParticleEnum;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -35,7 +35,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
     private static final Method SEND_PACKET;
 
     static {
-        String ver = ParticleEnum.getServerVersion();
+        String ver = FastParticle.SERVER_VERSION;
 
         PACKAGE_NAME_NMS = "net.minecraft.server." + ver;
         PACKAGE_NAME_OCB = "org.bukkit.craftbukkit." + ver;
@@ -120,7 +120,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
                         (float) z, (float) offsetX, (float) offsetY, (float) offsetZ, (float) extra, count, datas);
             } else {
                 packet = PACKET_PARTICLE.newInstance(
-                        particle.getLegacyName() + (datas.length != 2 ? "" : datas[0] + "_" + datas[1]),
+                        particle.getName() + (datas.length != 2 ? "" : "_" + datas[0] + "_" + datas[1]),
                         (float) x, (float) y, (float) z, (float) offsetX, (float) offsetY, (float) offsetZ, (float) extra, count);
             }
 
@@ -154,7 +154,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
             if (SERVER_IS_1_8) {
                 WORLD_SEND_PARTICLE.invoke(worldServer, null, enumParticleValueOf(particle), true, x, y, z, count, offsetX, offsetY, offsetZ, extra, datas);
             } else {
-                WORLD_SEND_PARTICLE.invoke(worldServer, particle.getLegacyName() + (datas.length != 2 ? "" : datas[0] + "_" + datas[1]), x, y, z,
+                WORLD_SEND_PARTICLE.invoke(worldServer, particle.getName() + (datas.length != 2 ? "" : "_" + datas[0] + "_" + datas[1]), x, y, z,
                         count, offsetX, offsetY, offsetZ, extra);
             }
         } catch (ReflectiveOperationException e) {
@@ -170,7 +170,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
     @Override
     public Object getParticle(ParticleEnum particle) {
         if (!SERVER_IS_1_8) {
-            return particle.getLegacyName();
+            return particle.getName();
         }
 
         try {
