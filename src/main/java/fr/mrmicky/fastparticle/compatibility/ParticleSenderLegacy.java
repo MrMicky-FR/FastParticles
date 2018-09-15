@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 @SuppressWarnings("deprecation")
 public class ParticleSenderLegacy extends AbstractParticleSender {
 
+    private static final boolean SERVER_IS_1_8;
     private static final String PACKAGE_NAME_NMS;
     private static final String PACKAGE_NAME_OCB;
 
@@ -34,11 +35,11 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
     private static final Method SEND_PACKET;
 
     static {
-        String name = Bukkit.getServer().getClass().getPackage().getName();
-        String ver = name.substring(name.lastIndexOf('.') + 1);
+        String ver = ParticleEnum.getServerVersion();
 
         PACKAGE_NAME_NMS = "net.minecraft.server." + ver;
         PACKAGE_NAME_OCB = "org.bukkit.craftbukkit." + ver;
+        SERVER_IS_1_8 = ver.startsWith("v1_8_");
 
         Constructor<?> packetParticle = null;
         Class<?> enumParticle = null;
@@ -61,7 +62,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
             Class<?> craftPlayerClass = getClassOCB("entity.CraftPlayer");
             Class<?> craftWorldClass = getClassOCB("CraftWorld");
 
-            if (Bukkit.getVersion().contains("1.8")) {
+            if (SERVER_IS_1_8) {
                 enumParticle = getClassNMS("EnumParticle");
                 packetParticle = packetParticleClass.getConstructor(enumParticle, boolean.class, float.class,
                         float.class, float.class, float.class, float.class, float.class, float.class, int.class,
@@ -114,7 +115,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
 
             Object packet;
 
-            if (Bukkit.getVersion().contains("1.8")) {
+            if (SERVER_IS_1_8) {
                 packet = PACKET_PARTICLE.newInstance(enumParticleValueOf(particle), true, (float) x, (float) y,
                         (float) z, (float) offsetX, (float) offsetY, (float) offsetZ, (float) extra, count, datas);
             } else {
@@ -150,7 +151,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
 
             Object worldServer = WORLD_GET_HANDLE.invoke(world);
 
-            if (Bukkit.getVersion().contains("1.8")) {
+            if (SERVER_IS_1_8) {
                 WORLD_SEND_PARTICLE.invoke(worldServer, null, enumParticleValueOf(particle), true, x, y, z, count, offsetX, offsetY, offsetZ, extra, datas);
             } else {
                 WORLD_SEND_PARTICLE.invoke(worldServer, particle.getLegacyName() + (datas.length != 2 ? "" : datas[0] + "_" + datas[1]), x, y, z,
@@ -168,7 +169,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
 
     @Override
     public Object getParticle(ParticleEnum particle) {
-        if (!Bukkit.getVersion().contains("1.8")) {
+        if (!SERVER_IS_1_8) {
             return particle.getLegacyName();
         }
 
@@ -201,7 +202,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
             }
 
             MaterialData materialData = (MaterialData) data;
-            if (Bukkit.getVersion().contains("1.8")) {
+            if (SERVER_IS_1_8) {
                 return new int[]{materialData.getItemType().getId() + (materialData.getData() << 12)};
             } else {
                 return new int[]{materialData.getItemType().getId(), materialData.getData()};
