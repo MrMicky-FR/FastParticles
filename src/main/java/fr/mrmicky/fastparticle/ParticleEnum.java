@@ -1,6 +1,5 @@
 package fr.mrmicky.fastparticle;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
@@ -78,13 +77,11 @@ public enum ParticleEnum {
     NAUTILUS(13),
     DOLPHIN(13);
 
-    private static final String SERVER_VERSION;
     private static final int SERVER_VERSION_ID;
 
     static {
-        String name = Bukkit.getServer().getClass().getPackage().getName();
-        SERVER_VERSION = name.substring(name.lastIndexOf('.') + 1);
-        SERVER_VERSION_ID = Integer.parseInt(SERVER_VERSION.charAt(4) == '_' ? Character.toString(SERVER_VERSION.charAt(3)) : SERVER_VERSION.substring(3, 5));
+        String ver = FastParticle.SERVER_VERSION;
+        SERVER_VERSION_ID = Integer.parseInt(ver.charAt(4) == '_' ? Character.toString(ver.charAt(3)) : ver.substring(3, 5));
     }
 
     private String legacyName;
@@ -137,9 +134,5 @@ public enum ParticleEnum {
         } catch (IllegalArgumentException e) {
             return null;
         }
-    }
-
-    public static String getServerVersion() {
-        return SERVER_VERSION;
     }
 }

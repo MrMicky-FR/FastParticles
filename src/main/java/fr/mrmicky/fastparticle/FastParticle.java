@@ -4,6 +4,7 @@ import fr.mrmicky.fastparticle.compatibility.AbstractParticleSender;
 import fr.mrmicky.fastparticle.compatibility.ParticleSender;
 import fr.mrmicky.fastparticle.compatibility.ParticleSender1_13;
 import fr.mrmicky.fastparticle.compatibility.ParticleSenderLegacy;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -15,7 +16,14 @@ import org.bukkit.entity.Player;
  */
 public class FastParticle {
 
+    public static final String SERVER_VERSION;
+
     private static AbstractParticleSender particleSender = getSender();
+
+    static {
+        String name = Bukkit.getServer().getClass().getPackage().getName();
+        SERVER_VERSION = name.substring(name.lastIndexOf('.') + 1);
+    }
 
     private static AbstractParticleSender getSender() {
         try {
