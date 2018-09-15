@@ -8,7 +8,7 @@ import org.bukkit.material.MaterialData;
  * @author MrMicky
  */
 @SuppressWarnings("deprecation")
-public enum ParticleEnum {
+public enum ParticleType {
 
     // 1.7+
     EXPLOSION_NORMAL("explode"),
@@ -87,11 +87,11 @@ public enum ParticleEnum {
     private String name;
     private int minimalVersion;
 
-    ParticleEnum(String minecraftName) {
+    ParticleType(String minecraftName) {
         this(minecraftName, -1);
     }
 
-    ParticleEnum(String minecraftName, int minimalVersion) {
+    ParticleType(String minecraftName, int minimalVersion) {
         this.name = minecraftName;
         this.minimalVersion = minimalVersion;
     }
@@ -119,13 +119,13 @@ public enum ParticleEnum {
         }
     }
 
-    public static ParticleEnum getParticle(String particleName) {
+    public static ParticleType getParticle(String particleName) {
         try {
-            return ParticleEnum.valueOf(particleName.toUpperCase());
+            return ParticleType.valueOf(particleName.toUpperCase());
         } catch (IllegalArgumentException e) {
         }
 
-        for (ParticleEnum particle : values()) {
+        for (ParticleType particle : values()) {
             if (particle.getName().equalsIgnoreCase(particleName)) {
                 return particle;
             }
