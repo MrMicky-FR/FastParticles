@@ -46,9 +46,9 @@ public enum ParticleEnum {
     SNOW_SHOVEL("snowshovel"),
     SLIME("slime"),
     HEART("heart"),
-    ITEM_CRACK("iconcrack_"),
-    BLOCK_CRACK("blockcrack_"),
-    BLOCK_DUST("blockdust_"),
+    ITEM_CRACK("iconcrack"),
+    BLOCK_CRACK("blockcrack"),
+    BLOCK_DUST("blockdust"),
 
     // 1.8+
     BARRIER("barrier", 8),
@@ -57,25 +57,25 @@ public enum ParticleEnum {
     ITEM_TAKE("take", 8),
 
     // 1.9+
-    DRAGON_BREATH(9),
-    END_ROD(9),
-    DAMAGE_INDICATOR(9),
-    SWEEP_ATTACK(9),
+    DRAGON_BREATH("dragonbreath", 9),
+    END_ROD("endRod", 9),
+    DAMAGE_INDICATOR("damageIndicator", 9),
+    SWEEP_ATTACK("sweepAttack", 9),
 
     // 1.10+
-    FALLING_DUST(10),
+    FALLING_DUST("fallingdust", 10),
 
     // 1.11+
-    TOTEM(11),
-    SPIT(11),
+    TOTEM("TOTEM", 11),
+    SPIT("spit", 11),
 
     // 1.13+
-    SQUID_INK(13),
-    BUBBLE_POP(13),
-    CURRENT_DOWN(13),
-    BUBBLE_COLUMN_UP(13),
-    NAUTILUS(13),
-    DOLPHIN(13);
+    SQUID_INK("squid_ink", 13),
+    BUBBLE_POP("bubble_pop", 13),
+    CURRENT_DOWN("current_down", 13),
+    BUBBLE_COLUMN_UP("bubble_column_up", 13),
+    NAUTILUS("nautilus", 13),
+    DOLPHIN("dolphin", 13);
 
     private static final int SERVER_VERSION_ID;
 
@@ -84,29 +84,20 @@ public enum ParticleEnum {
         SERVER_VERSION_ID = Integer.parseInt(ver.charAt(4) == '_' ? Character.toString(ver.charAt(3)) : ver.substring(3, 5));
     }
 
-    private String legacyName;
+    private String name;
     private int minimalVersion;
 
-    ParticleEnum(String legacyName) {
-        this(legacyName, -1);
+    ParticleEnum(String minecraftName) {
+        this(minecraftName, -1);
     }
 
-    ParticleEnum(int minimalVersion) {
-        this(null, minimalVersion);
-    }
-
-    ParticleEnum(String legacyName, int minimalVersion) {
-        this.legacyName = legacyName;
+    ParticleEnum(String minecraftName, int minimalVersion) {
+        this.name = minecraftName;
         this.minimalVersion = minimalVersion;
     }
 
-    public ParticleEnum valueOf() {
-        System.out.println();
-        return null;
-    }
-
-    public String getLegacyName() {
-        return legacyName;
+    public String getName() {
+        return name;
     }
 
     public boolean isCompatibleWithServerVersion() {
@@ -132,7 +123,13 @@ public enum ParticleEnum {
         try {
             return ParticleEnum.valueOf(particleName.toUpperCase());
         } catch (IllegalArgumentException e) {
-            return null;
         }
+
+        for (ParticleEnum particle : values()) {
+            if (particle.getName().equalsIgnoreCase(particleName)) {
+                return particle;
+            }
+        }
+        return null;
     }
 }
