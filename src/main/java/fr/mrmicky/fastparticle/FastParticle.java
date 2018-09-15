@@ -12,6 +12,8 @@ import org.bukkit.entity.Player;
 /**
  * An API for display particles on all server versions from 1.7 to 1.13
  *
+ * The project is on <a href="https://github.com/MrMicky-FR/FastParticles">GitHub</a>
+ *
  * @author MrMicky
  */
 public class FastParticle {
