@@ -191,7 +191,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
         Class<?> dataType = particle.getDataType();
         if (dataType == ItemStack.class) {
             if (data == null) {
-                return new int[2];
+                return SERVER_IS_1_8 ? new int[2] : new int[]{1, 0};
             }
 
             ItemStack itemStack = (ItemStack) data;
@@ -200,7 +200,7 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
 
         if (dataType == MaterialData.class) {
             if (data == null) {
-                return new int[1];
+                return SERVER_IS_1_8 ? new int[1] : new int[]{1, 0};
             }
 
             MaterialData materialData = (MaterialData) data;

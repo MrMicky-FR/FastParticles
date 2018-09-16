@@ -31,16 +31,14 @@ public class FastParticle {
         try {
             Class.forName("org.bukkit.Particle$DustOptions");
             return new ParticleSender1_13();
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e1) {
+            try {
+                Class.forName("org.bukkit.Particle");
+                return new ParticleSender();
+            } catch (ClassNotFoundException e2) {
+                return new ParticleSenderLegacy();
+            }
         }
-
-        try {
-            Class.forName("org.bukkit.Particle");
-            return new ParticleSender();
-        } catch (ClassNotFoundException e) {
-        }
-
-        return new ParticleSenderLegacy();
     }
 
     /*
