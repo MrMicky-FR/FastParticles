@@ -27,6 +27,9 @@ public class FastParticle {
 
     private static AbstractParticleSender particleSender = getSender();
 
+    private FastParticle() {
+    }
+
     private static AbstractParticleSender getSender() {
         try {
             Class.forName("org.bukkit.Particle$DustOptions");
@@ -65,8 +68,7 @@ public class FastParticle {
 
     public static void spawnParticle(World world, ParticleType particle, Location location, int count, double offsetX,
                                      double offsetY, double offsetZ) {
-        spawnParticle(world, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY,
-                offsetZ);
+        spawnParticle(world, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
     }
 
     public static void spawnParticle(World world, ParticleType particle, double x, double y, double z, int count,
@@ -87,8 +89,7 @@ public class FastParticle {
 
     public static void spawnParticle(World world, ParticleType particle, Location location, int count, double offsetX,
                                      double offsetY, double offsetZ, double extra) {
-        spawnParticle(world, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY,
-                offsetZ, extra);
+        spawnParticle(world, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra);
     }
 
     public static void spawnParticle(World world, ParticleType particle, double x, double y, double z, int count,
@@ -98,17 +99,12 @@ public class FastParticle {
 
     public static <T> void spawnParticle(World world, ParticleType particle, Location location, int count,
                                          double offsetX, double offsetY, double offsetZ, double extra, T data) {
-        spawnParticle(world, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY,
-                offsetZ, extra, data);
+        spawnParticle(world, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra, data);
     }
 
     public static <T> void spawnParticle(World world, ParticleType particle, double x, double y, double z, int count,
                                          double offsetX, double offsetY, double offsetZ, double extra, T data) {
-        if (particleSender == null) {
-            return;
-        }
-
-        particleSender.spawnParticle(world, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
+        sendParticle(world, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
     }
 
     /*
@@ -135,8 +131,7 @@ public class FastParticle {
 
     public static void spawnParticle(Player player, ParticleType particle, Location location, int count, double offsetX,
                                      double offsetY, double offsetZ) {
-        spawnParticle(player, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY,
-                offsetZ);
+        spawnParticle(player, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
     }
 
     public static void spawnParticle(Player player, ParticleType particle, double x, double y, double z, int count,
@@ -146,8 +141,7 @@ public class FastParticle {
 
     public static <T> void spawnParticle(Player player, ParticleType particle, Location location, int count,
                                          double offsetX, double offsetY, double offsetZ, T data) {
-        spawnParticle(player, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY,
-                offsetZ, data);
+        spawnParticle(player, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
     }
 
     public static <T> void spawnParticle(Player player, ParticleType particle, double x, double y, double z, int count,
@@ -157,8 +151,7 @@ public class FastParticle {
 
     public static void spawnParticle(Player player, ParticleType particle, Location location, int count, double offsetX,
                                      double offsetY, double offsetZ, double extra) {
-        spawnParticle(player, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY,
-                offsetZ, extra);
+        spawnParticle(player, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra);
     }
 
     public static void spawnParticle(Player player, ParticleType particle, double x, double y, double z, int count,
@@ -168,16 +161,25 @@ public class FastParticle {
 
     public static <T> void spawnParticle(Player player, ParticleType particle, Location location, int count,
                                          double offsetX, double offsetY, double offsetZ, double extra, T data) {
-        spawnParticle(player, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY,
-                offsetZ, extra, data);
+        spawnParticle(player, particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra, data);
     }
 
     public static <T> void spawnParticle(Player player, ParticleType particle, double x, double y, double z, int count,
                                          double offsetX, double offsetY, double offsetZ, double extra, T data) {
+
+        sendParticle(player, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
+    }
+
+    private static void sendParticle(Object receiver, ParticleType particle, double x, double y, double z, int count,
+                                     double offsetX, double offsetY, double offsetZ, double extra, Object data) {
         if (particleSender == null) {
             return;
         }
 
-        particleSender.spawnParticle(player, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
+        if (!particle.isCompatibleWithServerVersion()) {
+            throw new IllegalArgumentException("The particle '" + particle + "' is not compatible with your server version");
+        }
+
+        particleSender.spawnParticle(receiver, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
     }
 }
