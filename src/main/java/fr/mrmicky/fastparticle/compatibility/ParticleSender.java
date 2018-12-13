@@ -18,8 +18,8 @@ public class ParticleSender extends AbstractParticleSender {
         Particle bukkitParticle = Particle.valueOf(particle.toString());
 
         if (data instanceof Color) {
-            Color color = (Color) data;
             if (particle.getDataType() == Color.class) {
+                Color color = (Color) data;
                 count = 0;
                 offsetX = color(color.getRed());
                 offsetY = color(color.getGreen());

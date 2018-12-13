@@ -4,11 +4,9 @@ import fr.mrmicky.fastparticle.ParticleType;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.Particle.DustOptions;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
 
 /**
- * Particle sender without NMS for 1.13 servers
+ * Particle sender for 1.13 servers (add support for DustOptions)
  *
  * @author MrMicky
  */
@@ -22,11 +20,7 @@ public class ParticleSender1_13 extends ParticleSender {
             data = new DustOptions((Color) data, 1);
         }
 
-        if (receiver instanceof World) {
-            ((World) receiver).spawnParticle(bukkitParticle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
-        } else if (receiver instanceof Player) {
-            ((Player) receiver).spawnParticle(bukkitParticle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
-        }
+        super.spawnParticle(receiver, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
     }
 
     @Override

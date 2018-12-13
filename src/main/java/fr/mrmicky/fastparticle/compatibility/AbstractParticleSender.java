@@ -12,9 +12,6 @@ public abstract class AbstractParticleSender {
     public abstract boolean isValidData(Object particle, Object data);
 
     protected double color(double color) {
-        if (color <= 0) {
-            color = -1;
-        }
-        return color / 255;
+        return color / 255.0;
     }
 }

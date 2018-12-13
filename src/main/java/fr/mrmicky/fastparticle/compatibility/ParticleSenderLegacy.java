@@ -86,8 +86,8 @@ public class ParticleSenderLegacy extends AbstractParticleSender {
             int[] datas = toData(particle, data);
 
             if (data instanceof Color) {
-                Color color = (Color) data;
                 if (particle.getDataType() == Color.class) {
+                    Color color = (Color) data;
                     count = 0;
                     offsetX = color(color.getRed());
                     offsetY = color(color.getGreen());
