@@ -4,7 +4,6 @@ import fr.mrmicky.fastparticle.ParticleType;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Particle;
-import org.bukkit.Particle.DustOptions;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.material.MaterialData;
 
@@ -20,8 +19,8 @@ public class ParticleSender1_13 extends ParticleSender {
     public void spawnParticle(Object receiver, ParticleType particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, Object data) {
         Particle bukkitParticle = Particle.valueOf(particle.toString());
 
-        if (bukkitParticle.getDataType() == DustOptions.class && data instanceof Color) {
-            data = new DustOptions((Color) data, 1);
+        if (bukkitParticle.getDataType() == Particle.DustOptions.class && data instanceof Color) {
+            data = new Particle.DustOptions((Color) data, 1);
         } else if (bukkitParticle.getDataType() == BlockData.class && data instanceof MaterialData) {
             data = Bukkit.createBlockData(((MaterialData) data).getItemType());
         }
@@ -31,7 +30,7 @@ public class ParticleSender1_13 extends ParticleSender {
 
     @Override
     public boolean isValidDataBukkit(Particle particle, Object data) {
-        if (particle.getDataType() == DustOptions.class && data instanceof Color) {
+        if (particle.getDataType() == Particle.DustOptions.class && data instanceof Color) {
             return true;
         }
 
