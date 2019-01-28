@@ -1,15 +1,19 @@
 package fr.mrmicky.fastparticle.compatibility;
 
 import fr.mrmicky.fastparticle.ParticleType;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.Particle.DustOptions;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.material.MaterialData;
 
 /**
- * Particle sender for 1.13 servers (add support for DustOptions)
+ * Particle sender for 1.13 servers (add support for DustOptions and BlockData)
  *
  * @author MrMicky
  */
+@SuppressWarnings("deprecation")
 public class ParticleSender1_13 extends ParticleSender {
 
     @Override
@@ -18,6 +22,8 @@ public class ParticleSender1_13 extends ParticleSender {
 
         if (bukkitParticle.getDataType() == DustOptions.class && data instanceof Color) {
             data = new DustOptions((Color) data, 1);
+        } else if (bukkitParticle.getDataType() == BlockData.class && data instanceof MaterialData) {
+            data = Bukkit.createBlockData(((MaterialData) data).getItemType());
         }
 
         super.spawnParticle(receiver, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
@@ -26,6 +32,10 @@ public class ParticleSender1_13 extends ParticleSender {
     @Override
     public boolean isValidDataBukkit(Particle particle, Object data) {
         if (particle.getDataType() == DustOptions.class && data instanceof Color) {
+            return true;
+        }
+
+        if (particle.getDataType() == BlockData.class && data instanceof MaterialData) {
             return true;
         }
 
