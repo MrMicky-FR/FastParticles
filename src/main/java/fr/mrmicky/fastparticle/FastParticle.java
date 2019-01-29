@@ -4,7 +4,6 @@ import fr.mrmicky.fastparticle.compatibility.AbstractParticleSender;
 import fr.mrmicky.fastparticle.compatibility.ParticleSender;
 import fr.mrmicky.fastparticle.compatibility.ParticleSender1_13;
 import fr.mrmicky.fastparticle.compatibility.ParticleSenderLegacy;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -18,36 +17,24 @@ import org.bukkit.entity.Player;
  */
 public class FastParticle {
 
-    public static final String SERVER_VERSION;
+    private static final AbstractParticleSender PARTICLE_SENDER;
 
     static {
-        String name = Bukkit.getServer().getClass().getPackage().getName();
-        SERVER_VERSION = name.substring(name.lastIndexOf('.') + 1);
-    }
-
-    private static AbstractParticleSender particleSender = getSender();
-
-    private FastParticle() {
-    }
-
-    private static AbstractParticleSender getSender() {
-        try {
-            Class.forName("org.bukkit.Particle$DustOptions");
-            return new ParticleSender1_13();
-        } catch (ClassNotFoundException e1) {
-            try {
-                Class.forName("org.bukkit.Particle");
-                return new ParticleSender();
-            } catch (ClassNotFoundException e2) {
-                return new ParticleSenderLegacy();
-            }
+        if (FastReflection.optionalClass("org.bukkit.Particle$DustOptions").isPresent()) {
+            PARTICLE_SENDER = new ParticleSender1_13();
+        } else if (FastReflection.optionalClass("org.bukkit.Particle").isPresent()) {
+            PARTICLE_SENDER = new ParticleSender();
+        } else {
+            PARTICLE_SENDER = new ParticleSenderLegacy();
         }
     }
 
+    private FastParticle() {
+        throw new UnsupportedOperationException();
+    }
+
     /*
-     *
      * Worlds methods
-     *
      */
     public static void spawnParticle(World world, ParticleType particle, Location location, int count) {
         spawnParticle(world, particle, location.getX(), location.getY(), location.getZ(), count);
@@ -108,9 +95,7 @@ public class FastParticle {
     }
 
     /*
-     *
      * Player methods
-     *
      */
     public static void spawnParticle(Player player, ParticleType particle, Location location, int count) {
         spawnParticle(player, particle, location.getX(), location.getY(), location.getZ(), count);
@@ -166,20 +151,15 @@ public class FastParticle {
 
     public static <T> void spawnParticle(Player player, ParticleType particle, double x, double y, double z, int count,
                                          double offsetX, double offsetY, double offsetZ, double extra, T data) {
-
         sendParticle(player, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
     }
 
     private static void sendParticle(Object receiver, ParticleType particle, double x, double y, double z, int count,
                                      double offsetX, double offsetY, double offsetZ, double extra, Object data) {
-        if (particleSender == null) {
-            return;
-        }
-
         if (!particle.isCompatibleWithServerVersion()) {
             throw new IllegalArgumentException("The particle '" + particle + "' is not compatible with your server version");
         }
 
-        particleSender.spawnParticle(receiver, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
+        PARTICLE_SENDER.spawnParticle(receiver, particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
     }
 }

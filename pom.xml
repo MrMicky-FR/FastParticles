@@ -4,7 +4,7 @@
 
     <groupId>fr.mrmicky</groupId>
     <artifactId>fastparticles</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 
     <name>FastParticles</name>
 
@@ -13,9 +13,7 @@
     </properties>
 
     <build>
-        <defaultGoal>install</defaultGoal>
         <finalName>${project.name}</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -27,7 +25,6 @@
                 </configuration>
             </plugin>
         </plugins>
-
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

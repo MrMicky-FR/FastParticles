@@ -80,8 +80,8 @@ public enum ParticleType {
     private static final int SERVER_VERSION_ID;
 
     static {
-        String ver = FastParticle.SERVER_VERSION;
-        SERVER_VERSION_ID = Integer.parseInt(ver.charAt(4) == '_' ? Character.toString(ver.charAt(3)) : ver.substring(3, 5));
+        String ver = FastReflection.VERSION;
+        SERVER_VERSION_ID = ver.charAt(4) == '_' ? Character.getNumericValue(ver.charAt(3)) : Integer.parseInt(ver.substring(3, 5));
     }
 
     private String name;
