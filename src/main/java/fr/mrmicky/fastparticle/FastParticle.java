@@ -9,9 +9,9 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 /**
- * An API for display particles on all server versions from 1.7 to 1.13
+ * Simple Bukkit Particles API with 1.7 to 1.13.2 support !
  * <p>
- * The project is on <a href="https://github.com/MrMicky-FR/FastParticles">GitHub</a>
+ * You can find the project on <a href="https://github.com/MrMicky-FR/FastParticles">GitHub</a>
  *
  * @author MrMicky
  */
