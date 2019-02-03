@@ -30,7 +30,7 @@ Simple Bukkit Particles API with 1.7 to 1.13.2 support !
                 <configuration>
                     <relocations>
                         <relocation>
-                            <pattern>fr.mrmicky.fastparticles</pattern>
+                            <pattern>fr.mrmicky.fastparticle</pattern>
                             <!-- Replace with the package of your plugin ! -->
                             <shadedPattern>com.yourpackage.fastparticles</shadedPattern>
                         </relocation>
@@ -68,16 +68,16 @@ Just use a method from `FastParticle`
 
 ```java
 // Spawn particle to a player
-FastParticle.spawnParticle(player, ParticleType.REDSTONE, loc, 1);
+FastParticle.spawnParticle(player, ParticleType.FLAME, loc, 1);
 
 // Spawn particle to all players in a world
-FastParticle.spawnParticle(world, ParticleType.REDSTONE, loc, 1);
+FastParticle.spawnParticle(world, ParticleType.FLAME, loc, 1);
 
 // Spawn colored particle to a player
 FastParticle.spawnParticle(player, ParticleType.REDSTONE, loc, 1, Color.GREEN);
 
 // See if a ParticleType is compatible with the server version
-ParticleType.DOLPHIN.isCompatibleWithServerVersion() // Return true only on 1.13+
+ParticleType.DOLPHIN.isCompatibleWithServerVersion(); // Return true only on 1.13+ for this ParticleType
 ```
 
 ## TODO
