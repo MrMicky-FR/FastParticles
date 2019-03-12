@@ -1,9 +1,5 @@
 package fr.mrmicky.fastparticle;
 
-import fr.mrmicky.fastparticle.compatibility.AbstractParticleSender;
-import fr.mrmicky.fastparticle.compatibility.ParticleSender;
-import fr.mrmicky.fastparticle.compatibility.ParticleSender1_13;
-import fr.mrmicky.fastparticle.compatibility.ParticleSenderLegacy;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -15,15 +11,15 @@ import org.bukkit.entity.Player;
  *
  * @author MrMicky
  */
-public class FastParticle {
+public final class FastParticle {
 
-    private static final AbstractParticleSender PARTICLE_SENDER;
+    private static final ParticleSender PARTICLE_SENDER;
 
     static {
         if (FastReflection.optionalClass("org.bukkit.Particle$DustOptions").isPresent()) {
-            PARTICLE_SENDER = new ParticleSender1_13();
+            PARTICLE_SENDER = new ParticleSender.ParticleSender1_13();
         } else if (FastReflection.optionalClass("org.bukkit.Particle").isPresent()) {
-            PARTICLE_SENDER = new ParticleSender();
+            PARTICLE_SENDER = new ParticleSender.ParticleSenderImpl();
         } else {
             PARTICLE_SENDER = new ParticleSenderLegacy();
         }
