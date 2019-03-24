@@ -15,7 +15,6 @@ import java.lang.reflect.Method;
  *
  * @author MrMicky
  */
-@SuppressWarnings("deprecation")
 class ParticleSenderLegacy implements ParticleSender {
 
     private static final boolean SERVER_IS_1_8;
@@ -136,6 +135,7 @@ class ParticleSenderLegacy implements ParticleSender {
         return FastReflection.enumValueOf(ENUM_PARTICLE, particleType.toString());
     }
 
+    @SuppressWarnings("deprecation")
     private int[] toData(ParticleType particle, Object data) {
         Class<?> dataType = particle.getDataType();
         if (dataType == ItemStack.class) {

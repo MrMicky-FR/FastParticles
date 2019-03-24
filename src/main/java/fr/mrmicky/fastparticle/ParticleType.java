@@ -7,7 +7,6 @@ import org.bukkit.material.MaterialData;
 /**
  * @author MrMicky
  */
-@SuppressWarnings("deprecation")
 public enum ParticleType {
 
     // 1.7+
@@ -84,8 +83,8 @@ public enum ParticleType {
         SERVER_VERSION_ID = ver.charAt(4) == '_' ? Character.getNumericValue(ver.charAt(3)) : Integer.parseInt(ver.substring(3, 5));
     }
 
-    private String name;
-    private int minimalVersion;
+    private final String name;
+    private final int minimalVersion;
 
     ParticleType(String name) {
         this(name, -1);
@@ -111,6 +110,7 @@ public enum ParticleType {
             case BLOCK_CRACK:
             case BLOCK_DUST:
             case FALLING_DUST:
+                //noinspection deprecation
                 return MaterialData.class;
             case REDSTONE:
                 return Color.class;
