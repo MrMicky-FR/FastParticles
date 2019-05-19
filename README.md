@@ -1,4 +1,7 @@
 # FastParticles
+[![JitPack](https://jitpack.io/v/fr.mrmicky/FastParticles.svg)](https://jitpack.io/#fr.mrmicky/FastParticles)
+[![Discord](https://img.shields.io/discord/390919659874156560.svg?colorB=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/q9UwaBT)
+
 Simple Bukkit Particles API with 1.7 to 1.14 support !
 
 ## Features
@@ -53,7 +56,7 @@ Simple Bukkit Particles API with 1.7 to 1.14 support !
         <dependency>
             <groupId>fr.mrmicky</groupId>
             <artifactId>FastParticles</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>1.2.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
