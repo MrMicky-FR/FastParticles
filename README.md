@@ -77,7 +77,7 @@ FastParticle.spawnParticle(world, ParticleType.FLAME, loc, 1);
 FastParticle.spawnParticle(player, ParticleType.REDSTONE, loc, 1, Color.GREEN);
 
 // See if a ParticleType is compatible with the server version
-ParticleType.DOLPHIN.isCompatibleWithServerVersion(); // Return true only on 1.13+ for this ParticleType
+ParticleType.DOLPHIN.isSupported(); // Return true only on 1.13+ for this ParticleType
 ```
 
 ## TODO

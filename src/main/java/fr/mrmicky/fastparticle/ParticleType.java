@@ -69,22 +69,22 @@ public enum ParticleType {
     SPIT("spit", 11),
 
     // 1.13+
-    SQUID_INK("squid_ink", 13),
-    BUBBLE_POP("bubble_pop", 13),
-    CURRENT_DOWN("current_down", 13),
-    BUBBLE_COLUMN_UP("bubble_column_up", 13),
-    NAUTILUS("nautilus", 13),
-    DOLPHIN("dolphin", 13),
+    SQUID_INK(13),
+    BUBBLE_POP(13),
+    CURRENT_DOWN(13),
+    BUBBLE_COLUMN_UP(13),
+    NAUTILUS(13),
+    DOLPHIN(13),
 
     // 1.14+
-    SNEEZE("sneeze", 14),
-    CAMPFIRE_COSY_SMOKE("campfire_cosy_smoke", 14),
-    CAMPFIRE_SIGNAL_SMOKE("campfire_signal_smoke", 14),
-    COMPOSTER("composter", 14),
-    FLASH("flash", 14),
-    FALLING_LAVA("falling_lava", 14),
-    LANDING_LAVA("landing_lava", 14),
-    FALLING_WATER("falling_water", 14);
+    SNEEZE(14),
+    CAMPFIRE_COSY_SMOKE(14),
+    CAMPFIRE_SIGNAL_SMOKE(14),
+    COMPOSTER(14),
+    FLASH(14),
+    FALLING_LAVA(14),
+    LANDING_LAVA(14),
+    FALLING_WATER(14);
 
     private static final int SERVER_VERSION_ID;
 
@@ -93,23 +93,37 @@ public enum ParticleType {
         SERVER_VERSION_ID = ver.charAt(4) == '_' ? Character.getNumericValue(ver.charAt(3)) : Integer.parseInt(ver.substring(3, 5));
     }
 
-    private final String name;
+    private final String legacyName;
     private final int minimalVersion;
 
+    // 1.7 particles
     ParticleType(String name) {
         this(name, -1);
     }
 
-    ParticleType(String name, int minimalVersion) {
-        this.name = name;
+    // 1.13+ particles
+    ParticleType(int minimalVersion) {
+        this(null, minimalVersion);
+    }
+
+    // 1.8-1.12 particles
+    ParticleType(String legacyName, int minimalVersion) {
+        this.legacyName = legacyName;
         this.minimalVersion = minimalVersion;
     }
 
-    public String getName() {
-        return name;
+    public boolean hasLegacyName() {
+        return legacyName != null;
     }
 
-    public boolean isCompatibleWithServerVersion() {
+    public String getLegacyName() {
+        if (!hasLegacyName()) {
+            throw new IllegalStateException("Particle " + name() + " don't have legacy name");
+        }
+        return legacyName;
+    }
+
+    public boolean isSupported() {
         return minimalVersion <= 0 || SERVER_VERSION_ID >= minimalVersion;
     }
 
@@ -134,7 +148,7 @@ public enum ParticleType {
             return ParticleType.valueOf(particleName.toUpperCase());
         } catch (IllegalArgumentException e) {
             for (ParticleType particle : values()) {
-                if (particle.getName().equalsIgnoreCase(particleName)) {
+                if (particle.getLegacyName().equalsIgnoreCase(particleName)) {
                     return particle;
                 }
             }

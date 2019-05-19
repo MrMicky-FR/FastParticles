@@ -152,7 +152,7 @@ public final class FastParticle {
 
     private static void sendParticle(Object receiver, ParticleType particle, double x, double y, double z, int count,
                                      double offsetX, double offsetY, double offsetZ, double extra, Object data) {
-        if (!particle.isCompatibleWithServerVersion()) {
+        if (!particle.isSupported()) {
             throw new IllegalArgumentException("The particle '" + particle + "' is not compatible with your server version");
         }
 
