@@ -74,7 +74,17 @@ public enum ParticleType {
     CURRENT_DOWN("current_down", 13),
     BUBBLE_COLUMN_UP("bubble_column_up", 13),
     NAUTILUS("nautilus", 13),
-    DOLPHIN("dolphin", 13);
+    DOLPHIN("dolphin", 13),
+
+    // 1.14+
+    SNEEZE("sneeze", 14),
+    CAMPFIRE_COSY_SMOKE("campfire_cosy_smoke", 14),
+    CAMPFIRE_SIGNAL_SMOKE("campfire_signal_smoke", 14),
+    COMPOSTER("composter", 14),
+    FLASH("flash", 14),
+    FALLING_LAVA("falling_lava", 14),
+    LANDING_LAVA("landing_lava", 14),
+    FALLING_WATER("falling_water", 14);
 
     private static final int SERVER_VERSION_ID;
 

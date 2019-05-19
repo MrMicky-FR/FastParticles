@@ -1,12 +1,12 @@
 # FastParticles
-Simple Bukkit Particles API with 1.7 to 1.13.2 support !
+Simple Bukkit Particles API with 1.7 to 1.14 support !
 
 ## Features
 
 * Easy to use
 * Don't use reflection with compatible Bukkit versions
 * Support all particle data on all versions
-* Works on 1.13 with and without legacy particles
+* Works on 1.13+ with and without legacy particles
 
 ## How to use
 
