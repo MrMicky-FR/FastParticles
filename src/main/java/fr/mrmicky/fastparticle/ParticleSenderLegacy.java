@@ -109,7 +109,7 @@ class ParticleSenderLegacy implements ParticleSender {
                 SEND_PACKET.invoke(playerConnection, packet);
             }
         } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
