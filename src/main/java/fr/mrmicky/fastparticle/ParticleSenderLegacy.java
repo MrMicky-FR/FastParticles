@@ -28,6 +28,7 @@ class ParticleSenderLegacy implements ParticleSender {
     private static final Method PLAYER_GET_HANDLE;
     private static final Field PLAYER_CONNECTION;
     private static final Method SEND_PACKET;
+    private static final int[] EMPTY = new int[0];
 
     static {
         ENUM_PARTICLE = FastReflection.nmsOptionalClass("EnumParticle").orElse(null);
@@ -89,7 +90,7 @@ class ParticleSenderLegacy implements ParticleSender {
                 if (SERVER_IS_1_8) {
                     WORLD_SEND_PARTICLE.invoke(worldServer, null, getEnumParticle(particle), true, x, y, z, count, offsetX, offsetY, offsetZ, extra, datas);
                 } else {
-                    String particleName = particle.getLegacyName() + (datas == null || datas.length != 2 ? "" : "_" + datas[0] + "_" + datas[1]);
+                    String particleName = particle.getLegacyName() + (datas.length != 2 ? "" : "_" + datas[0] + "_" + datas[1]);
                     WORLD_SEND_PARTICLE.invoke(worldServer, particleName, x, y, z, count, offsetX, offsetY, offsetZ, extra);
                 }
             } else if (receiver instanceof Player) {
@@ -99,7 +100,7 @@ class ParticleSenderLegacy implements ParticleSender {
                     packet = PACKET_PARTICLE.newInstance(getEnumParticle(particle), true, (float) x, (float) y,
                             (float) z, (float) offsetX, (float) offsetY, (float) offsetZ, (float) extra, count, datas);
                 } else {
-                    String particleName = particle.getLegacyName() + (datas == null || datas.length != 2 ? "" : "_" + datas[0] + "_" + datas[1]);
+                    String particleName = particle.getLegacyName() + (datas.length != 2 ? "" : "_" + datas[0] + "_" + datas[1]);
                     packet = PACKET_PARTICLE.newInstance(particleName, (float) x, (float) y, (float) z,
                             (float) offsetX, (float) offsetY, (float) offsetZ, (float) extra, count);
                 }
@@ -160,6 +161,6 @@ class ParticleSenderLegacy implements ParticleSender {
             }
         }
 
-        return null;
+        return EMPTY;
     }
 }
