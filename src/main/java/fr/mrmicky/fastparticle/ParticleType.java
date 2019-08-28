@@ -10,63 +10,63 @@ import org.bukkit.material.MaterialData;
 public enum ParticleType {
 
     // 1.7+
-    EXPLOSION_NORMAL("explode"),
-    EXPLOSION_LARGE("largeexplode"),
-    EXPLOSION_HUGE("hugeexplosion"),
-    FIREWORKS_SPARK("fireworksSpark"),
-    WATER_BUBBLE("bubble"),
-    WATER_SPLASH("splash"),
-    WATER_WAKE("wake"),
-    SUSPENDED("suspended"),
-    SUSPENDED_DEPTH("depthsuspend"),
-    CRIT("crit"),
-    CRIT_MAGIC("magicCrit"),
-    SMOKE_NORMAL("smoke"),
-    SMOKE_LARGE("largesmoke"),
-    SPELL("spell"),
-    SPELL_INSTANT("instantSpell"),
-    SPELL_MOB("mobSpell"),
-    SPELL_MOB_AMBIENT("mobSpellAmbient"),
-    SPELL_WITCH("witchMagic"),
-    DRIP_WATER("dripWater"),
-    DRIP_LAVA("dripLava"),
-    VILLAGER_ANGRY("angryVillager"),
-    VILLAGER_HAPPY("happyVillager"),
-    TOWN_AURA("townaura"),
-    NOTE("note"),
-    PORTAL("portal"),
-    ENCHANTMENT_TABLE("enchantmenttable"),
-    FLAME("flame"),
-    LAVA("lava"),
-    FOOTSTEP("footstep"),
-    CLOUD("cloud"),
-    REDSTONE("reddust"),
-    SNOWBALL("snowballpoof"),
-    SNOW_SHOVEL("snowshovel"),
-    SLIME("slime"),
-    HEART("heart"),
-    ITEM_CRACK("iconcrack"),
-    BLOCK_CRACK("blockcrack"),
-    BLOCK_DUST("blockdust"),
+    EXPLOSION_NORMAL("explode", "poof"),
+    EXPLOSION_LARGE("largeexplode", "explosion"),
+    EXPLOSION_HUGE("hugeexplosion", "explosion_emitter"),
+    FIREWORKS_SPARK("fireworksSpark", "firework"),
+    WATER_BUBBLE("bubble", "bubble"),
+    WATER_SPLASH("splash", "splash"),
+    WATER_WAKE("wake", "fishing"),
+    SUSPENDED("suspended", "underwater"),
+    SUSPENDED_DEPTH("depthsuspend", "underwater"),
+    CRIT("crit", "crit"),
+    CRIT_MAGIC("magicCrit", "enchanted_hit"),
+    SMOKE_NORMAL("smoke", "smoke"),
+    SMOKE_LARGE("largesmoke", "large_smoke"),
+    SPELL("spell", "effect"),
+    SPELL_INSTANT("instantSpell", "instant_effect"),
+    SPELL_MOB("mobSpell", "entity_effect"),
+    SPELL_MOB_AMBIENT("mobSpellAmbient", "ambient_entity_effect"),
+    SPELL_WITCH("witchMagic", "witch"),
+    DRIP_WATER("dripWater", "dripping_water"),
+    DRIP_LAVA("dripLava", "dripping_lava"),
+    VILLAGER_ANGRY("angryVillager", "angry_villager"),
+    VILLAGER_HAPPY("happyVillager", "happy_villager"),
+    TOWN_AURA("townaura", "mycelium"),
+    NOTE("note", "note"),
+    PORTAL("portal", "portal"),
+    ENCHANTMENT_TABLE("enchantmenttable", "enchant"),
+    FLAME("flame", "flame"),
+    LAVA("lava", "lava"),
+    // FOOTSTEP("footstep", null),
+    CLOUD("cloud", "cloud"),
+    REDSTONE("reddust", "dust"),
+    SNOWBALL("snowballpoof", "item_snowball"),
+    SNOW_SHOVEL("snowshovel", "item_snowball"),
+    SLIME("slime", "item_slime"),
+    HEART("heart", "heart"),
+    ITEM_CRACK("iconcrack", "item"),
+    BLOCK_CRACK("blockcrack", "block"),
+    BLOCK_DUST("blockdust", "block"),
 
     // 1.8+
-    BARRIER("barrier", 8),
-    WATER_DROP("droplet", 8),
-    MOB_APPEARANCE("mobappearance", 8),
-    ITEM_TAKE("take", 8),
+    BARRIER("barrier", "barrier", 8),
+    WATER_DROP("droplet", "rain", 8),
+    MOB_APPEARANCE("mobappearance", "elder_guardian", 8),
+    // ITEM_TAKE("take", null, 8),
 
     // 1.9+
-    DRAGON_BREATH("dragonbreath", 9),
-    END_ROD("endRod", 9),
-    DAMAGE_INDICATOR("damageIndicator", 9),
-    SWEEP_ATTACK("sweepAttack", 9),
+    DRAGON_BREATH("dragonbreath", "dragon_breath", 9),
+    END_ROD("endRod", "end_rod", 9),
+    DAMAGE_INDICATOR("damageIndicator", "damage_indicator", 9),
+    SWEEP_ATTACK("sweepAttack", "sweep_attack", 9),
 
     // 1.10+
-    FALLING_DUST("fallingdust", 10),
+    FALLING_DUST("fallingdust", "falling_dust", 10),
 
     // 1.11+
-    TOTEM("totem", 11),
-    SPIT("spit", 11),
+    TOTEM("totem", "totem_of_undying", 11),
+    SPIT("spit", "spit", 11),
 
     // 1.13+
     SQUID_INK(13),
@@ -94,22 +94,26 @@ public enum ParticleType {
     }
 
     private final String legacyName;
-    private final int minimalVersion;
+    private final String name;
+    private final int minimumVersion;
 
     // 1.7 particles
-    ParticleType(String name) {
-        this(name, -1);
+    ParticleType(String legacyName, String name) {
+        this(legacyName, name, -1);
     }
 
     // 1.13+ particles
-    ParticleType(int minimalVersion) {
-        this(null, minimalVersion);
+    ParticleType(int minimumVersion) {
+        this.legacyName = null;
+        this.name = name().toLowerCase();
+        this.minimumVersion = minimumVersion;
     }
 
     // 1.8-1.12 particles
-    ParticleType(String legacyName, int minimalVersion) {
+    ParticleType(String legacyName, String name, int minimumVersion) {
         this.legacyName = legacyName;
-        this.minimalVersion = minimalVersion;
+        this.name = name;
+        this.minimumVersion = minimumVersion;
     }
 
     public boolean hasLegacyName() {
@@ -123,8 +127,12 @@ public enum ParticleType {
         return legacyName;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean isSupported() {
-        return minimalVersion <= 0 || SERVER_VERSION_ID >= minimalVersion;
+        return minimumVersion <= 0 || SERVER_VERSION_ID >= minimumVersion;
     }
 
     public Class<?> getDataType() {
@@ -148,7 +156,11 @@ public enum ParticleType {
             return ParticleType.valueOf(particleName.toUpperCase());
         } catch (IllegalArgumentException e) {
             for (ParticleType particle : values()) {
-                if (particle.getLegacyName().equalsIgnoreCase(particleName)) {
+                if (particle.getName().equalsIgnoreCase(particleName)) {
+                    return particle;
+                }
+
+                if (particle.hasLegacyName() && particle.getLegacyName().equalsIgnoreCase(particleName)) {
                     return particle;
                 }
             }
