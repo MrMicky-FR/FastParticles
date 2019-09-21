@@ -56,7 +56,7 @@ Simple Bukkit Particles API with 1.7 to 1.14 support !
         <dependency>
             <groupId>fr.mrmicky</groupId>
             <artifactId>FastParticles</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.3</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
