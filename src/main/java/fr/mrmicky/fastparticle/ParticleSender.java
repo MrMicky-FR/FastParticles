@@ -76,8 +76,12 @@ interface ParticleSender {
         public void spawnParticle(Object receiver, ParticleType particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, Object data) {
             Particle bukkitParticle = Particle.valueOf(particle.toString());
 
-            if (bukkitParticle.getDataType() == Particle.DustOptions.class && data instanceof Color) {
-                data = new Particle.DustOptions((Color) data, 1);
+            if (bukkitParticle.getDataType() == Particle.DustOptions.class) {
+                if (data instanceof Color) {
+                    data = new Particle.DustOptions((Color) data, 1);
+                } else if (data == null) {
+                    data = new Particle.DustOptions(Color.RED, 1);
+                }
             } else if (bukkitParticle.getDataType() == BlockData.class && data instanceof MaterialData) {
                 data = Bukkit.createBlockData(((MaterialData) data).getItemType());
             }
