@@ -2,7 +2,7 @@
 [![JitPack](https://jitpack.io/v/fr.mrmicky/FastParticles.svg)](https://jitpack.io/#fr.mrmicky/FastParticles)
 [![Discord](https://img.shields.io/discord/390919659874156560.svg?colorB=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/q9UwaBT)
 
-Simple Bukkit Particles API with 1.7 to 1.14 support !
+Simple Bukkit Particles API with 1.7 to 1.15 support !
 
 ## Features
 
@@ -86,3 +86,5 @@ ParticleType.DOLPHIN.isSupported(); // Return true only on 1.13+ for this Partic
 ## TODO
 * Add JavaDoc
 * Deploy to an other maven repo
+* Cache particles
+* Color data

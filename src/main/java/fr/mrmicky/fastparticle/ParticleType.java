@@ -84,7 +84,13 @@ public enum ParticleType {
     FLASH(14),
     FALLING_LAVA(14),
     LANDING_LAVA(14),
-    FALLING_WATER(14);
+    FALLING_WATER(14),
+
+    // 1.15+
+    DRIPPING_HONEY(15),
+    FALLING_HONEY(15),
+    LANDING_HONEY(15),
+    FALLING_NECTAR(15);
 
     private static final int SERVER_VERSION_ID;
 
