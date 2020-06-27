@@ -42,7 +42,6 @@ public enum ParticleType {
     ENCHANTMENT_TABLE("enchantmenttable", "enchant"),
     FLAME("flame", "flame"),
     LAVA("lava", "lava"),
-    FOOTSTEP("footstep", null),
     CLOUD("cloud", "cloud"),
     REDSTONE("reddust", "dust"),
     SNOWBALL("snowballpoof", "item_snowball"),
@@ -57,7 +56,6 @@ public enum ParticleType {
     BARRIER("barrier", "barrier", 8),
     WATER_DROP("droplet", "rain", 8),
     MOB_APPEARANCE("mobappearance", "elder_guardian", 8),
-    // ITEM_TAKE("take", null, 8),
 
     // 1.9+
     DRAGON_BREATH("dragonbreath", "dragon_breath", 9),
@@ -106,7 +104,21 @@ public enum ParticleType {
     FALLING_OBSIDIAN_TEAR(16),
     LANDING_OBSIDIAN_TEAR(16),
     REVERSE_PORTAL(16),
-    WHITE_ASH(16);
+    WHITE_ASH(16),
+
+    // --- Removed particles ---
+    /**
+     * @deprecated This particle has been removed in Minecraft 1.13 and can't be spawned
+     * on 1.13+ servers and will not be visible to 1.13+ players.
+     */
+    @Deprecated
+    FOOTSTEP("footstep", null), // 1.7+
+    /**
+     * @deprecated This particle has been removed in Minecraft 1.13 and can't be spawned
+     * on 1.13+ servers and will not be visible to 1.13+ players.
+     */
+    @Deprecated
+    ITEM_TAKE("take", null, 8); // 1.8+
 
     private static final int SERVER_VERSION_ID;
 
