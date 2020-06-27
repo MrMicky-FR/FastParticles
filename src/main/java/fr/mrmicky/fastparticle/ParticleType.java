@@ -5,8 +5,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
 /**
+ * All the supported particles types.
+ * Depending on the server version some particles may not be available.
+ *
  * @author MrMicky
  */
+@SuppressWarnings("deprecation")
 public enum ParticleType {
 
     // 1.7+
@@ -38,7 +42,7 @@ public enum ParticleType {
     ENCHANTMENT_TABLE("enchantmenttable", "enchant"),
     FLAME("flame", "flame"),
     LAVA("lava", "lava"),
-    // FOOTSTEP("footstep", null),
+    FOOTSTEP("footstep", null),
     CLOUD("cloud", "cloud"),
     REDSTONE("reddust", "dust"),
     SNOWBALL("snowballpoof", "item_snowball"),
@@ -90,7 +94,19 @@ public enum ParticleType {
     DRIPPING_HONEY(15),
     FALLING_HONEY(15),
     LANDING_HONEY(15),
-    FALLING_NECTAR(15);
+    FALLING_NECTAR(15),
+
+    // 1.16+
+    SOUL_FIRE_FLAME(16),
+    ASH(16),
+    CRIMSON_SPORE(16),
+    WARPED_SPORE(16),
+    SOUL(16),
+    DRIPPING_OBSIDIAN_TEAR(16),
+    FALLING_OBSIDIAN_TEAR(16),
+    LANDING_OBSIDIAN_TEAR(16),
+    REVERSE_PORTAL(16),
+    WHITE_ASH(16);
 
     private static final int SERVER_VERSION_ID;
 
@@ -134,11 +150,16 @@ public enum ParticleType {
     }
 
     public String getName() {
-        return name;
+        return name != null ? name : legacyName;
     }
 
     public boolean isSupported() {
-        return minimumVersion <= 0 || SERVER_VERSION_ID >= minimumVersion;
+        // Legacy particles
+        if (minimumVersion <= 0) {
+            return name != null || SERVER_VERSION_ID < 13;
+        }
+
+        return SERVER_VERSION_ID >= minimumVersion;
     }
 
     public Class<?> getDataType() {
@@ -148,7 +169,6 @@ public enum ParticleType {
             case BLOCK_CRACK:
             case BLOCK_DUST:
             case FALLING_DUST:
-                //noinspection deprecation
                 return MaterialData.class;
             case REDSTONE:
                 return Color.class;

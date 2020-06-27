@@ -2,7 +2,9 @@
 [![JitPack](https://jitpack.io/v/fr.mrmicky/FastParticles.svg)](https://jitpack.io/#fr.mrmicky/FastParticles)
 [![Discord](https://img.shields.io/discord/390919659874156560.svg?colorB=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/q9UwaBT)
 
-Simple Bukkit Particles API with 1.7 to 1.15 support !
+Simple Bukkit Particles API with 1.7.10 to 1.16 support.
+
+**:warning: If you don't need 1.7/1.8 support, this library is not required and you should just use the Bukkit methods: [`Player#spawnParticle`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html#spawnParticle-org.bukkit.Particle-double-double-double-int-) and [`World#spawnParticle`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/World.html#spawnParticle-org.bukkit.Particle-double-double-double-int-). :warning:**
 
 ## Features
 
@@ -14,61 +16,72 @@ Simple Bukkit Particles API with 1.7 to 1.15 support !
 ## How to use
 
 ### Add FastParticles in your plugin
-**Maven**
+#### Maven
 ```xml
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <relocations>
-                        <relocation>
-                            <pattern>fr.mrmicky.fastparticle</pattern>
-                            <!-- Replace with the package of your plugin ! -->
-                            <shadedPattern>com.yourpackage.fastparticles</shadedPattern>
-                        </relocation>
-                    </relocations>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.2.1</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <relocations>
+                    <relocation>
+                        <pattern>fr.mrmicky.fastparticle</pattern>
+                        <!-- Replace with the package of your plugin ! -->
+                        <shadedPattern>com.yourpackage.fastparticles</shadedPattern>
+                    </relocation>
+                </relocations>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 ```
 ```xml
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
 ```
 ```xml
-    <dependencies>
-        <dependency>
-            <groupId>fr.mrmicky</groupId>
-            <artifactId>FastParticles</artifactId>
-            <version>1.2.3</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+<dependencies>
+    <dependency>
+        <groupId>fr.mrmicky</groupId>
+        <artifactId>FastParticles</artifactId>
+        <version>1.2.3</version>
+        <scope>compile</scope>
+    </dependency>
+</dependencies>
 ```
 
-**Manual**
+#### Gradle
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+```
+```groovy
+dependencies {
+    compile 'fr.mrmicky:FastParticles:1.2.3'
+}
+```
 
-Just copy all the class in your plugin
+#### Manual
+
+Just copy all the classes in your plugin.
 
 ### Spawn some particles
-Just use a method from `FastParticle`
-
+Just use a method from `FastParticle`:
 ```java
 // Spawn particle to a player
 FastParticle.spawnParticle(player, ParticleType.FLAME, loc, 1);
@@ -85,6 +98,4 @@ ParticleType.DOLPHIN.isSupported(); // Return true only on 1.13+ for this Partic
 
 ## TODO
 * Add JavaDoc
-* Deploy to an other maven repo
-* Cache particles
-* Color data
+* Deploy to another maven repo
