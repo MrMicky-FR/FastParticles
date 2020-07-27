@@ -58,7 +58,7 @@ Simple Bukkit Particles API with 1.7.10 to 1.16 support.
     <dependency>
         <groupId>fr.mrmicky</groupId>
         <artifactId>FastParticles</artifactId>
-        <version>1.2.3</version>
+        <version>1.2.4</version>
         <scope>compile</scope>
     </dependency>
 </dependencies>
@@ -72,7 +72,7 @@ repositories {
 ```
 ```groovy
 dependencies {
-    compile 'fr.mrmicky:FastParticles:1.2.3'
+    compile 'fr.mrmicky:FastParticles:1.2.4'
 }
 ```
 

@@ -13,6 +13,7 @@ import org.bukkit.material.MaterialData;
  *
  * @author MrMicky
  */
+@SuppressWarnings("deprecation")
 interface ParticleSender {
 
     void spawnParticle(Object receiver, ParticleType particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, Object data);
@@ -69,7 +70,6 @@ interface ParticleSender {
         }
     }
 
-    @SuppressWarnings("deprecation")
     class ParticleSender1_13 extends ParticleSenderImpl {
 
         @Override
