@@ -6,29 +6,24 @@
 
     <groupId>fr.mrmicky</groupId>
     <artifactId>fastparticles</artifactId>
-    <version>1.2.4</version>
+    <version>2.0.0</version>
 
     <name>FastParticles</name>
+    <description>Lightweight particle API for Bukkit plugins.</description>
     <url>https://github.com/MrMicky-FR/FastParticles</url>
-    <description>Simple Bukkit Particles API with 1.7.10 to 1.16 support.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.17-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <repositories>
         <repository>
@@ -37,13 +32,18 @@
         </repository>
     </repositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.16.1-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

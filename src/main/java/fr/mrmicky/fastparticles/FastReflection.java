@@ -1,4 +1,4 @@
-package fr.mrmicky.fastparticle;
+package fr.mrmicky.fastparticles;
 
 import org.bukkit.Bukkit;
 
@@ -14,7 +14,9 @@ public final class FastReflection {
     public static final String OBC_PACKAGE = "org.bukkit.craftbukkit";
     public static final String NMS_PACKAGE = "net.minecraft.server";
 
-    public static final String VERSION = Bukkit.getServer().getClass().getPackage().getName().substring(OBC_PACKAGE.length() + 1);
+    public static final String VERSION = Bukkit.getServer().getClass().getSimpleName().equals("CraftServer")
+            ? Bukkit.getServer().getClass().getPackage().getName().substring(OBC_PACKAGE.length() + 1)
+            : "unknown";
 
     private FastReflection() {
         throw new UnsupportedOperationException();
@@ -52,8 +54,7 @@ public final class FastReflection {
         }
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public static Object enumValueOf(Class<?> enumClass, String enumName) {
-        return Enum.valueOf((Class<Enum>) enumClass, enumName.toUpperCase());
+        return Enum.valueOf(enumClass.asSubclass(Enum.class), enumName);
     }
 }
