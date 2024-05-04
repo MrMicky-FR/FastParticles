@@ -20,7 +20,7 @@ final class ParticleTypes {
     static final Class<?> DUST_TRANSITION_CLASS = FastReflection.optionalClass("org.bukkit.Particle$DustTransition").orElse(null);
     static final Map<Class<?>, Class<?>> DATA_ADAPTERS = new HashMap<>();
     static final boolean LEGACY = !FastReflection.optionalClass("org.bukkit.Particle").isPresent();
-    static final boolean MODERN = BLOCK_DATA_CLASS != null && Particle.BLOCK_CRACK.getDataType() == BLOCK_DATA_CLASS;
+    static final boolean MODERN = BLOCK_DATA_CLASS != null && Particle.FALLING_DUST.getDataType() == BLOCK_DATA_CLASS;
     static final ParticleData.DustOptions DEFAULT_DUST_OPTIONS = ParticleData.createDustOptions(Color.RED, 1);
 
     static {
@@ -77,7 +77,7 @@ final class ParticleTypes {
             Class<?> type = this.particle.getDataType();
 
             // Return color for redstone on legacy servers
-            if (type == Void.class && this.particle == Particle.REDSTONE) {
+            if (type == Void.class && !MODERN && this.particle == Particle.REDSTONE) {
                 return Color.class;
             }
 
@@ -126,7 +126,12 @@ final class ParticleTypes {
             }
 
             if (dataType == Void.class) {
-                return this.particle == Particle.REDSTONE && data instanceof Color ? data : null;
+                // Map color to dust options for redstone on legacy servers
+                if (!MODERN && data instanceof Color && this.particle == Particle.REDSTONE) {
+                    return data;
+                }
+
+                return null;
             }
 
             if (dataType == DUST_OPTIONS_CLASS) {

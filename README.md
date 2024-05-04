@@ -2,14 +2,15 @@
 [![JitPack](https://jitpack.io/v/fr.mrmicky/FastParticles.svg)](https://jitpack.io/#fr.mrmicky/FastParticles)
 [![Discord](https://img.shields.io/discord/390919659874156560.svg?colorB=5865f2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/q9UwaBT)
 
-Lightweight particle API for Bukkit plugins, with 1.7.10 to 1.19 support.
+Lightweight particle API for Bukkit plugins, compatible with all Minecraft versions starting with 1.7.10!
 
-**:warning: If you don't need 1.7/1.8 support, this library is not required and you should just use the Bukkit methods [`Player#spawnParticle`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html#spawnParticle-org.bukkit.Particle-double-double-double-int-) and [`World#spawnParticle`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/World.html#spawnParticle-org.bukkit.Particle-double-double-double-int-). :warning:**
+> [!IMPORTANT]
+> If you don't need 1.7/1.8 support, this library is not required, and you should just use the Bukkit methods [`Player#spawnParticle`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/Player.html#spawnParticle(org.bukkit.Particle,org.bukkit.Location,int)) and [`World#spawnParticle`](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/World.html#spawnParticle(org.bukkit.Particle,org.bukkit.Location,int)).
 
 ## Features
 
 * Easy to use
-* No reflection with compatible Bukkit versions
+* No reflection on compatible Bukkit versions
 * Support all particle data on all versions for legacy particles
 * Works on 1.13 and higher servers, with and without legacy particles
 
@@ -55,7 +56,7 @@ Lightweight particle API for Bukkit plugins, with 1.7.10 to 1.19 support.
     <dependency>
         <groupId>fr.mrmicky</groupId>
         <artifactId>FastParticles</artifactId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
     </dependency>
 </dependencies>
 ```
@@ -71,7 +72,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'fr.mrmicky:FastParticles:2.0.0'
+    implementation 'fr.mrmicky:FastParticles:2.0.1'
 }
 ```
 

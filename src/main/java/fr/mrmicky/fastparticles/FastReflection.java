@@ -11,19 +11,18 @@ import java.util.Optional;
  */
 public final class FastReflection {
 
-    public static final String OBC_PACKAGE = "org.bukkit.craftbukkit";
-    public static final String NMS_PACKAGE = "net.minecraft.server";
+    private static final String OBC_PACKAGE_BASE = "org.bukkit.craftbukkit";
+    private static final String NMS_PACKAGE_BASE = "net.minecraft.server";
 
-    public static final String VERSION = Bukkit.getServer().getClass().getSimpleName().equals("CraftServer")
-            ? Bukkit.getServer().getClass().getPackage().getName().substring(OBC_PACKAGE.length() + 1)
-            : "unknown";
+    private static final String OBC_PACKAGE = Bukkit.getServer().getClass().getPackage().getName();
+    private static final String NMS_PACKAGE = OBC_PACKAGE.replace(OBC_PACKAGE_BASE, NMS_PACKAGE_BASE);
 
     private FastReflection() {
         throw new UnsupportedOperationException();
     }
 
     public static String nmsClassName(String className) {
-        return NMS_PACKAGE + '.' + VERSION + '.' + className;
+        return NMS_PACKAGE + '.' + className;
     }
 
     public static Class<?> nmsClass(String className) throws ClassNotFoundException {
@@ -35,7 +34,7 @@ public final class FastReflection {
     }
 
     public static String obcClassName(String className) {
-        return OBC_PACKAGE + '.' + VERSION + '.' + className;
+        return OBC_PACKAGE + '.' + className;
     }
 
     public static Class<?> obcClass(String className) throws ClassNotFoundException {
