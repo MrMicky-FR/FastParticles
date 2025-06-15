@@ -92,7 +92,7 @@ final class LegacyParticleType implements ParticleType {
     }
 
     @Override
-    public void spawn(World world, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, Object rawData) {
+    public void spawn(World world, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, Object rawData, boolean force) {
         try {
             if (rawData instanceof ParticleData.AbstractParticleData) {
                 rawData = ((ParticleData.AbstractParticleData) rawData).data;
@@ -111,7 +111,7 @@ final class LegacyParticleType implements ParticleType {
             }
 
             if (IS_1_8) {
-                WORLD_SEND_PARTICLE.invoke(worldServer, null, this.particle, true, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
+                WORLD_SEND_PARTICLE.invoke(worldServer, null, this.particle, force, x, y, z, count, offsetX, offsetY, offsetZ, extra, data);
             } else {
                 String particleName = this.particle + (data.length != 2 ? "" : "_" + data[0] + "_" + data[1]);
                 WORLD_SEND_PARTICLE.invoke(worldServer, particleName, x, y, z, count, offsetX, offsetY, offsetZ, extra);
@@ -122,7 +122,7 @@ final class LegacyParticleType implements ParticleType {
     }
 
     @Override
-    public void spawn(Player player, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, Object rawData) {
+    public void spawn(Player player, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, Object rawData, boolean force) {
         try {
             if (rawData instanceof ParticleData.AbstractParticleData) {
                 rawData = ((ParticleData.AbstractParticleData) rawData).data;
@@ -141,7 +141,7 @@ final class LegacyParticleType implements ParticleType {
             }
 
             if (IS_1_8) {
-                packet = PACKET_PARTICLE.newInstance(this.particle, true, (float) x, (float) y,
+                packet = PACKET_PARTICLE.newInstance(this.particle, force, (float) x, (float) y,
                         (float) z, (float) offsetX, (float) offsetY, (float) offsetZ, (float) extra, count, data);
             } else {
                 String particleName = this.particle + (data.length != 2 ? "" : "_" + data[0] + "_" + data[1]);

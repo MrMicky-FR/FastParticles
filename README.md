@@ -1,6 +1,6 @@
 # FastParticles
+
 [![JitPack](https://jitpack.io/v/fr.mrmicky/FastParticles.svg)](https://jitpack.io/#fr.mrmicky/FastParticles)
-[![Discord](https://img.shields.io/discord/390919659874156560.svg?colorB=5865f2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/q9UwaBT)
 
 Lightweight particle API for Bukkit plugins, compatible with all Minecraft versions starting with 1.7.10!
 
@@ -36,7 +36,7 @@ Lightweight particle API for Bukkit plugins, compatible with all Minecraft versi
                 <relocations>
                     <relocation>
                         <pattern>fr.mrmicky.fastparticles</pattern>
-                        <!-- Replace with the package of your plugin ! -->
+                        <!-- Replace this with the package of your plugin! -->
                         <shadedPattern>com.yourpackage.fastparticles</shadedPattern>
                     </relocation>
                 </relocations>
@@ -56,7 +56,7 @@ Lightweight particle API for Bukkit plugins, compatible with all Minecraft versi
     <dependency>
         <groupId>fr.mrmicky</groupId>
         <artifactId>FastParticles</artifactId>
-        <version>2.0.1</version>
+        <version>2.0.2</version>
     </dependency>
 </dependencies>
 ```
@@ -64,7 +64,7 @@ Lightweight particle API for Bukkit plugins, compatible with all Minecraft versi
 ### Gradle
 ```groovy
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'com.gradleup.shadow' version '8.3.0'
 }
 
 repositories {
@@ -72,7 +72,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'fr.mrmicky:FastParticles:2.0.1'
+    implementation 'fr.mrmicky:FastParticles:2.0.2'
 }
 ```
 
@@ -84,7 +84,7 @@ Copy all the classes in your plugin.
 
 ### Spawning particles
 
-Simply use a method from `FastParticle`:
+Use a method from `FastParticle`:
 ```java
 // Get a ParticleType
 ParticleType flame = ParticleType.of("FLAME");
@@ -94,7 +94,7 @@ ParticleType blockCrack = ParticleType.of("BLOCK_CRACK");
 // Spawn particle for a player
 flame.spawn(player, loc, 1);
 
-// Spawn particle for all players in a world
+// Spawn particle for all players in the world
 flame.spawn(world, loc, 1);
 
 // Spawn colored particle to a player
@@ -104,4 +104,4 @@ redstone.spawn(player, loc, 1, ParticleData.createDustOptions(Color.BLUE, 1));
 blockCrack.spawn(player, loc, 1, ParticleData.createBlockData(Material.DIAMOND));
 ```
 
-When you need to spawn a large amount of particles, you can cache instances of `ParticleType` and `ParticleData` to slightly improve performances.
+When you need to spawn a large number of particles, you can cache instances of `ParticleType` and `ParticleData` to slightly improve performances.

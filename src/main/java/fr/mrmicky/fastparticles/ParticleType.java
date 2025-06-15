@@ -10,7 +10,7 @@ public interface ParticleType {
      *
      * @param name Name of the particle to get
      * @return the particle type
-     * @throws IllegalArgumentException if the particle type doesn't exists or isn't supported
+     * @throws IllegalArgumentException if the particle type doesn't exist or isn't supported
      */
     static ParticleType of(String name) {
         return ParticleTypes.of(name);
@@ -57,9 +57,9 @@ public interface ParticleType {
      * at the target location.
      *
      * @param world the world to spawn particle to
-     * @param x     the position on the x axis to spawn at
-     * @param y     the position on the y axis to spawn at
-     * @param z     the position on the z axis to spawn at
+     * @param x     the position on the x-axis to spawn at
+     * @param y     the position on the y-axis to spawn at
+     * @param z     the position on the z-axis to spawn at
      * @param count the number of particles
      */
     default void spawn(World world, double x, double y, double z, int count) {
@@ -87,9 +87,9 @@ public interface ParticleType {
      *
      * @param <T>   type of particle data (see {@link ParticleType#getDataType()}
      * @param world the world to spawn particle to
-     * @param x     the position on the x axis to spawn at
-     * @param y     the position on the y axis to spawn at
-     * @param z     the position on the z axis to spawn at
+     * @param x     the position on the x-axis to spawn at
+     * @param y     the position on the y-axis to spawn at
+     * @param z     the position on the z-axis to spawn at
      * @param count the number of particles
      * @param data  the data to use for the particle or null,
      *              the type of this depends on {@link ParticleType#getDataType()}
@@ -107,9 +107,9 @@ public interface ParticleType {
      * @param world    the world to spawn particle to
      * @param location the location to spawn at
      * @param count    the number of particles
-     * @param offsetX  the maximum random offset on the X axis
-     * @param offsetY  the maximum random offset on the Y axis
-     * @param offsetZ  the maximum random offset on the Z axis
+     * @param offsetX  the maximum random offset on the x-axis
+     * @param offsetY  the maximum random offset on the y-axis
+     * @param offsetZ  the maximum random offset on the z-axis
      */
     default void spawn(World world, Location location, int count, double offsetX, double offsetY, double offsetZ) {
         spawn(world, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
@@ -122,13 +122,13 @@ public interface ParticleType {
      * on each axis.
      *
      * @param world   the world to spawn particle to
-     * @param x       the position on the x axis to spawn at
-     * @param y       the position on the y axis to spawn at
-     * @param z       the position on the z axis to spawn at
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
      * @param count   the number of particles
-     * @param offsetX the maximum random offset on the X axis
-     * @param offsetY the maximum random offset on the Y axis
-     * @param offsetZ the maximum random offset on the Z axis
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
      */
     default void spawn(World world, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ) {
         spawn(world, x, y, z, count, offsetX, offsetY, offsetZ, null);
@@ -144,9 +144,9 @@ public interface ParticleType {
      * @param world    the world to spawn particle to
      * @param location the location to spawn at
      * @param count    the number of particles
-     * @param offsetX  the maximum random offset on the X axis
-     * @param offsetY  the maximum random offset on the Y axis
-     * @param offsetZ  the maximum random offset on the Z axis
+     * @param offsetX  the maximum random offset on the x-axis
+     * @param offsetY  the maximum random offset on the y-axis
+     * @param offsetZ  the maximum random offset on the z-axis
      * @param data     the data to use for the particle or null,
      *                 the type of this depends on {@link ParticleType#getDataType()}
      */
@@ -162,13 +162,13 @@ public interface ParticleType {
      *
      * @param <T>     type of particle data (see {@link ParticleType#getDataType()}
      * @param world   the world to spawn particle to
-     * @param x       the position on the x axis to spawn at
-     * @param y       the position on the y axis to spawn at
-     * @param z       the position on the z axis to spawn at
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
      * @param count   the number of particles
-     * @param offsetX the maximum random offset on the X axis
-     * @param offsetY the maximum random offset on the Y axis
-     * @param offsetZ the maximum random offset on the Z axis
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
      * @param data    the data to use for the particle or null,
      *                the type of this depends on {@link ParticleType#getDataType()}
      */
@@ -185,9 +185,9 @@ public interface ParticleType {
      * @param world    the world to spawn particle to
      * @param location the location to spawn at
      * @param count    the number of particles
-     * @param offsetX  the maximum random offset on the X axis
-     * @param offsetY  the maximum random offset on the Y axis
-     * @param offsetZ  the maximum random offset on the Z axis
+     * @param offsetX  the maximum random offset on the x-axis
+     * @param offsetY  the maximum random offset on the y-axis
+     * @param offsetZ  the maximum random offset on the z-axis
      * @param extra    the extra data for this particle, depends on the
      *                 particle used (normally speed)
      */
@@ -202,13 +202,13 @@ public interface ParticleType {
      * on each axis.
      *
      * @param world   the world to spawn particle to
-     * @param x       the position on the x axis to spawn at
-     * @param y       the position on the y axis to spawn at
-     * @param z       the position on the z axis to spawn at
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
      * @param count   the number of particles
-     * @param offsetX the maximum random offset on the X axis
-     * @param offsetY the maximum random offset on the Y axis
-     * @param offsetZ the maximum random offset on the Z axis
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
      * @param extra   the extra data for this particle, depends on the
      *                particle used (normally speed)
      */
@@ -226,9 +226,9 @@ public interface ParticleType {
      * @param world    the world to spawn particle to
      * @param location the location to spawn at
      * @param count    the number of particles
-     * @param offsetX  the maximum random offset on the X axis
-     * @param offsetY  the maximum random offset on the Y axis
-     * @param offsetZ  the maximum random offset on the Z axis
+     * @param offsetX  the maximum random offset on the x-axis
+     * @param offsetY  the maximum random offset on the y-axis
+     * @param offsetZ  the maximum random offset on the z-axis
      * @param extra    the extra data for this particle, depends on the
      *                 particle used (normally speed)
      * @param data     the data to use for the particle or null,
@@ -246,19 +246,46 @@ public interface ParticleType {
      *
      * @param <T>     type of particle data (see {@link ParticleType#getDataType()}
      * @param world   the world to spawn particle to
-     * @param x       the position on the x axis to spawn at
-     * @param y       the position on the y axis to spawn at
-     * @param z       the position on the z axis to spawn at
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
      * @param count   the number of particles
-     * @param offsetX the maximum random offset on the X axis
-     * @param offsetY the maximum random offset on the Y axis
-     * @param offsetZ the maximum random offset on the Z axis
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
      * @param extra   the extra data for this particle, depends on the
      *                particle used (normally speed)
      * @param data    the data to use for the particle or null,
      *                the type of this depends on {@link ParticleType#getDataType()}
      */
-    <T> void spawn(World world, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data);
+    default <T> void spawn(World world, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data) {
+        spawn(world, x, y, z, count, offsetX, offsetY, offsetZ, extra, data, false);
+    }
+
+    /**
+     * Spawns the particle (the number of times specified by count)
+     * at the target location. The position of each particle will be
+     * randomized positively and negatively by the offset parameters
+     * on each axis.
+     *
+     * @param <T>     type of particle data (see {@link ParticleType#getDataType()}
+     * @param world   the world to spawn particle to
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
+     * @param count   the number of particles
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
+     * @param extra   the extra data for this particle, depends on the
+     *                particle used (normally speed)
+     * @param data    the data to use for the particle or null,
+     *                the type of this depends on {@link ParticleType#getDataType()}
+     * @param force   whether to send the particle to players within an extended
+     *                range and encourage their client to render it regardless of
+     *                settings
+     */
+    <T> void spawn(World world, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data, boolean force);
 
     /**
      * Spawns the particle (the number of times specified by count)
@@ -277,9 +304,9 @@ public interface ParticleType {
      * at the target location.
      *
      * @param player the player to spawn particle to
-     * @param x      the position on the x axis to spawn at
-     * @param y      the position on the y axis to spawn at
-     * @param z      the position on the z axis to spawn at
+     * @param x      the position on the x-axis to spawn at
+     * @param y      the position on the y-axis to spawn at
+     * @param z      the position on the z-axis to spawn at
      * @param count  the number of particles
      */
     default void spawn(Player player, double x, double y, double z, int count) {
@@ -307,9 +334,9 @@ public interface ParticleType {
      *
      * @param <T>    type of particle data (see {@link ParticleType#getDataType()}
      * @param player the player to spawn particle to
-     * @param x      the position on the x axis to spawn at
-     * @param y      the position on the y axis to spawn at
-     * @param z      the position on the z axis to spawn at
+     * @param x      the position on the x-axis to spawn at
+     * @param y      the position on the y-axis to spawn at
+     * @param z      the position on the z-axis to spawn at
      * @param count  the number of particles
      * @param data   the data to use for the particle or null,
      *               the type of this depends on {@link ParticleType#getDataType()}
@@ -327,9 +354,9 @@ public interface ParticleType {
      * @param player   the player to spawn particle to
      * @param location the location to spawn at
      * @param count    the number of particles
-     * @param offsetX  the maximum random offset on the X axis
-     * @param offsetY  the maximum random offset on the Y axis
-     * @param offsetZ  the maximum random offset on the Z axis
+     * @param offsetX  the maximum random offset on the x-axis
+     * @param offsetY  the maximum random offset on the y-axis
+     * @param offsetZ  the maximum random offset on the z-axis
      */
     default void spawn(Player player, Location location, int count, double offsetX, double offsetY, double offsetZ) {
         spawn(player, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
@@ -342,13 +369,13 @@ public interface ParticleType {
      * on each axis.
      *
      * @param player  the player to spawn particle to
-     * @param x       the position on the x axis to spawn at
-     * @param y       the position on the y axis to spawn at
-     * @param z       the position on the z axis to spawn at
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
      * @param count   the number of particles
-     * @param offsetX the maximum random offset on the X axis
-     * @param offsetY the maximum random offset on the Y axis
-     * @param offsetZ the maximum random offset on the Z axis
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
      */
     default void spawn(Player player, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ) {
         spawn(player, x, y, z, count, offsetX, offsetY, offsetZ, null);
@@ -364,9 +391,9 @@ public interface ParticleType {
      * @param player   the player to spawn particle to
      * @param location the location to spawn at
      * @param count    the number of particles
-     * @param offsetX  the maximum random offset on the X axis
-     * @param offsetY  the maximum random offset on the Y axis
-     * @param offsetZ  the maximum random offset on the Z axis
+     * @param offsetX  the maximum random offset on the x-axis
+     * @param offsetY  the maximum random offset on the y-axis
+     * @param offsetZ  the maximum random offset on the z-axis
      * @param data     the data to use for the particle or null,
      *                 the type of this depends on {@link ParticleType#getDataType()}
      */
@@ -382,13 +409,13 @@ public interface ParticleType {
      *
      * @param <T>     type of particle data (see {@link ParticleType#getDataType()}
      * @param player  the player to spawn particle to
-     * @param x       the position on the x axis to spawn at
-     * @param y       the position on the y axis to spawn at
-     * @param z       the position on the z axis to spawn at
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
      * @param count   the number of particles
-     * @param offsetX the maximum random offset on the X axis
-     * @param offsetY the maximum random offset on the Y axis
-     * @param offsetZ the maximum random offset on the Z axis
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
      * @param data    the data to use for the particle or null,
      *                the type of this depends on {@link ParticleType#getDataType()}
      */
@@ -405,9 +432,9 @@ public interface ParticleType {
      * @param player   the player to spawn particle to
      * @param location the location to spawn at
      * @param count    the number of particles
-     * @param offsetX  the maximum random offset on the X axis
-     * @param offsetY  the maximum random offset on the Y axis
-     * @param offsetZ  the maximum random offset on the Z axis
+     * @param offsetX  the maximum random offset on the x-axis
+     * @param offsetY  the maximum random offset on the y-axis
+     * @param offsetZ  the maximum random offset on the z-axis
      * @param extra    the extra data for this particle, depends on the
      *                 particle used (normally speed)
      */
@@ -422,13 +449,13 @@ public interface ParticleType {
      * on each axis.
      *
      * @param player  the player to spawn particle to
-     * @param x       the position on the x axis to spawn at
-     * @param y       the position on the y axis to spawn at
-     * @param z       the position on the z axis to spawn at
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
      * @param count   the number of particles
-     * @param offsetX the maximum random offset on the X axis
-     * @param offsetY the maximum random offset on the Y axis
-     * @param offsetZ the maximum random offset on the Z axis
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
      * @param extra   the extra data for this particle, depends on the
      *                particle used (normally speed)
      */
@@ -446,9 +473,9 @@ public interface ParticleType {
      * @param player   the player to spawn particle to
      * @param location the location to spawn at
      * @param count    the number of particles
-     * @param offsetX  the maximum random offset on the X axis
-     * @param offsetY  the maximum random offset on the Y axis
-     * @param offsetZ  the maximum random offset on the Z axis
+     * @param offsetX  the maximum random offset on the x-axis
+     * @param offsetY  the maximum random offset on the y-axis
+     * @param offsetZ  the maximum random offset on the z-axis
      * @param extra    the extra data for this particle, depends on the
      *                 particle used (normally speed)
      * @param data     the data to use for the particle or null,
@@ -466,17 +493,44 @@ public interface ParticleType {
      *
      * @param <T>     type of particle data (see {@link ParticleType#getDataType()}
      * @param player  the player to spawn particle to
-     * @param x       the position on the x axis to spawn at
-     * @param y       the position on the y axis to spawn at
-     * @param z       the position on the z axis to spawn at
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
      * @param count   the number of particles
-     * @param offsetX the maximum random offset on the X axis
-     * @param offsetY the maximum random offset on the Y axis
-     * @param offsetZ the maximum random offset on the Z axis
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
      * @param extra   the extra data for this particle, depends on the
      *                particle used (normally speed)
      * @param data    the data to use for the particle or null,
      *                the type of this depends on {@link ParticleType#getDataType()}
      */
-    <T> void spawn(Player player, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data);
+    default <T> void spawn(Player player, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data) {
+        spawn(player, x, y, z, count, offsetX, offsetY, offsetZ, extra, data, false);
+    }
+
+    /**
+     * Spawns the particle (the number of times specified by count)
+     * at the target location. The position of each particle will be
+     * randomized positively and negatively by the offset parameters
+     * on each axis.
+     *
+     * @param <T>     type of particle data (see {@link ParticleType#getDataType()}
+     * @param player  the player to spawn particle to
+     * @param x       the position on the x-axis to spawn at
+     * @param y       the position on the y-axis to spawn at
+     * @param z       the position on the z-axis to spawn at
+     * @param count   the number of particles
+     * @param offsetX the maximum random offset on the x-axis
+     * @param offsetY the maximum random offset on the y-axis
+     * @param offsetZ the maximum random offset on the z-axis
+     * @param extra   the extra data for this particle, depends on the
+     *                particle used (normally speed)
+     * @param data    the data to use for the particle or null,
+     *                the type of this depends on {@link ParticleType#getDataType()}
+     * @param force   whether to send the particle to players within an extended
+     *                range and encourage their client to render it regardless of
+     *                settings
+     */
+    <T> void spawn(Player player, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data, boolean force);
 }

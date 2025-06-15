@@ -61,6 +61,10 @@ final class ParticleTypes {
 
     static final class DefaultParticleType implements ParticleType {
 
+        private static final Particle OLD_REDSTONE = LEGACY || MODERN ? null : Particle.valueOf("REDSTONE");
+        private static final boolean WORLD_HAS_FORCE = hasForceArgument(World.class);
+        private static final boolean PLAYER_HAS_FORCE = hasForceArgument(Player.class);
+
         private final Particle particle;
 
         public DefaultParticleType(Particle particle) {
@@ -77,7 +81,7 @@ final class ParticleTypes {
             Class<?> type = this.particle.getDataType();
 
             // Return color for redstone on legacy servers
-            if (type == Void.class && !MODERN && this.particle == Particle.REDSTONE) {
+            if (type == Void.class && this.particle == OLD_REDSTONE) {
                 return Color.class;
             }
 
@@ -85,7 +89,7 @@ final class ParticleTypes {
         }
 
         @Override
-        public <T> void spawn(World world, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data) {
+        public <T> void spawn(World world, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data, boolean force) {
             Object newData = mapData(data);
 
             if (newData instanceof Color) {
@@ -98,11 +102,15 @@ final class ParticleTypes {
                 newData = null;
             }
 
-            world.spawnParticle(this.particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, newData);
+            if (WORLD_HAS_FORCE) {
+                world.spawnParticle(this.particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, newData, force);
+            } else {
+                world.spawnParticle(this.particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, newData);
+            }
         }
 
         @Override
-        public <T> void spawn(Player player, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data) {
+        public <T> void spawn(Player player, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data, boolean force) {
             Object newData = mapData(data);
 
             if (newData instanceof Color) {
@@ -115,7 +123,11 @@ final class ParticleTypes {
                 newData = null;
             }
 
-            player.spawnParticle(this.particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, newData);
+            if (PLAYER_HAS_FORCE) {
+                player.spawnParticle(this.particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, newData, force);
+            } else {
+                player.spawnParticle(this.particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, newData);
+            }
         }
 
         private Object mapData(Object data) {
@@ -127,7 +139,7 @@ final class ParticleTypes {
 
             if (dataType == Void.class) {
                 // Map color to dust options for redstone on legacy servers
-                if (!MODERN && data instanceof Color && this.particle == Particle.REDSTONE) {
+                if (data instanceof Color && this.particle == OLD_REDSTONE) {
                     return data;
                 }
 
@@ -171,6 +183,22 @@ final class ParticleTypes {
         @Override
         public String toString() {
             return "DefaultParticleType{particle=" + this.particle + '}';
+        }
+
+        private static boolean hasForceArgument(Class<?> type) {
+            if (LEGACY) {
+                return false;
+            }
+
+            try {
+                type.getMethod("spawnParticle", Particle.class, double.class,
+                        double.class, double.class, int.class, double.class, double.class,
+                        double.class, double.class, Object.class, boolean.class);
+
+                return true;
+            } catch (NoSuchMethodException e) {
+                return false;
+            }
         }
     }
 }
